@@ -1,4 +1,4 @@
-package com.ellafy.school_management_jpa_hibernate.service;
+package com.ellafy.school_management_jpa_hibernate.service.courseService;
 
 import com.ellafy.school_management_jpa_hibernate.dao.CourseRepository;
 import com.ellafy.school_management_jpa_hibernate.entity.Course;
@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class CourseServiceImpl implements CourseService{
+public class CourseServiceImpl implements CourseService {
 
     private CourseRepository courseRepository;
 
@@ -33,18 +33,28 @@ public class CourseServiceImpl implements CourseService{
     @Override
     public Course findById(int theId) {
         Optional<Course> courseOptional = courseRepository.findById(theId);
+
         Course course = null;
+
         if (courseOptional.isPresent()){
             course = courseOptional.get();
         } else {
             throw new NotFoundException("Course with id - " + theId + " Not Found");
         }
+
         return course;
     }
 
     @Override
     public void deleteById(int theId) {
-        courseRepository.deleteById(theId);
+        Optional<Course> courseOptional = courseRepository.findById(theId);
+
+        if (courseOptional.isPresent()){
+            courseRepository.deleteById(theId);
+        } else {
+            throw new NotFoundException("Course with id - " + theId + " Not Found");
+        }
+
     }
 
 }

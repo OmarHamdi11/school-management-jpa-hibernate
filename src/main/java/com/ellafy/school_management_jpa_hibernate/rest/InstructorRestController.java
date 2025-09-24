@@ -1,9 +1,9 @@
 package com.ellafy.school_management_jpa_hibernate.rest;
 
 
-import com.ellafy.school_management_jpa_hibernate.entity.Course;
+import com.ellafy.school_management_jpa_hibernate.entity.Instructor;
 import com.ellafy.school_management_jpa_hibernate.response.ApiResponse;
-import com.ellafy.school_management_jpa_hibernate.service.courseService.CourseService;
+import com.ellafy.school_management_jpa_hibernate.service.InstructorService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,65 +14,65 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
-public class CourseRestController {
+public class InstructorRestController {
 
-    private CourseService courseService;
-    private ObjectMapper objectMapper;
+    private final InstructorService instructorService;
+    private final ObjectMapper objectMapper;
 
     @Autowired
-    public CourseRestController(CourseService courseService, ObjectMapper objectMapper) {
-        this.courseService = courseService;
+    public InstructorRestController(InstructorService instructorService, ObjectMapper objectMapper) {
+        this.instructorService = instructorService;
         this.objectMapper = objectMapper;
     }
 
-    @PostMapping("/courses")
-    public ResponseEntity<ApiResponse<Course>> addCourse(@RequestBody Course course){
-        course.setId(0);
+    @PostMapping("/instructors")
+    public ResponseEntity<ApiResponse<Instructor>> addInstructor(@RequestBody Instructor instructor){
+        instructor.setId(0);
 
-        Course course1 =  courseService.save(course);
+        Instructor instructor1 =  instructorService.save(instructor);
 
         return ResponseEntity.ok(
                 new ApiResponse<>(
                         HttpStatus.OK.value(),
                         "Success",
                         System.currentTimeMillis(),
-                        course1
+                        instructor1
                 )
         );
     }
 
-    @GetMapping("/courses")
-    public ResponseEntity<ApiResponse<List<Course>>> findAll(){
-        List<Course> courses = courseService.findAll();
+    @GetMapping("/instructors")
+    public ResponseEntity<ApiResponse<List<Instructor>>> findAll(){
+        List<Instructor> instructors = instructorService.findAll();
 
         return ResponseEntity.ok(
                 new ApiResponse<>(
                         HttpStatus.FOUND.value(),
                         "Success",
                         System.currentTimeMillis(),
-                        courses
+                        instructors
                 )
         );
     }
 
-    @GetMapping("/courses/{courseId}")
-    public ResponseEntity<ApiResponse<Course>> getCourse(@PathVariable int courseId){
-        Course course = courseService.findById(courseId);
+    @GetMapping("/instructors/{instructorId}")
+    public ResponseEntity<ApiResponse<Instructor>> getInstructor(@PathVariable int instructorId){
+        Instructor instructor = instructorService.findById(instructorId);
 
         return ResponseEntity.ok(
                 new ApiResponse<>(
                         HttpStatus.FOUND.value(),
                         "Success",
                         System.currentTimeMillis(),
-                        course
+                        instructor
                 )
         );
     }
 
-    @DeleteMapping("/courses/{courseId}")
-    public ResponseEntity<ApiResponse<String>> deleteCourse(@PathVariable int courseId){
+    @DeleteMapping("/instructors/{instructorId}")
+    public ResponseEntity<ApiResponse<String>> deleteInstructor(@PathVariable int instructorId){
 
-        courseService.deleteById(courseId);
+        instructorService.deleteById(instructorId);
 
         return ResponseEntity.ok(
                 new ApiResponse<>(
@@ -83,4 +83,6 @@ public class CourseRestController {
                 )
         );
     }
+
+
 }
