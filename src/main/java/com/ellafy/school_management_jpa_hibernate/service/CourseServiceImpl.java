@@ -37,7 +37,7 @@ public class CourseServiceImpl implements CourseService{
         if (courseOptional.isPresent()){
             course = courseOptional.get();
         } else {
-            throw new NotFoundException("Course with id - " + theId + "Not Found");
+            throw new NotFoundException("Course with id - " + theId + " Not Found");
         }
         return course;
     }
