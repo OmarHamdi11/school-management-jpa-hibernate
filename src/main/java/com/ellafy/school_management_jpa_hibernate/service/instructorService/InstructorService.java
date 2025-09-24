@@ -1,4 +1,4 @@
-package com.ellafy.school_management_jpa_hibernate.service;
+package com.ellafy.school_management_jpa_hibernate.service.instructorService;
 
 import com.ellafy.school_management_jpa_hibernate.entity.Instructor;
 

@@ -1,4 +1,4 @@
-package com.ellafy.school_management_jpa_hibernate.service;
+package com.ellafy.school_management_jpa_hibernate.service.instructorService;
 
 import com.ellafy.school_management_jpa_hibernate.dao.InstructorRepository;
 import com.ellafy.school_management_jpa_hibernate.entity.Instructor;
@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class InstructorServiceImpl implements InstructorService{
+public class InstructorServiceImpl implements InstructorService {
 
     private InstructorRepository instructorRepository;
 
